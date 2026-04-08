@@ -41,11 +41,10 @@ def show_all():
             print("Phone:", details["phone"])
             print("Email:", details["email"])
     else:
-        
         print("No contact")
 
 while True:
-    print("\n1.Add 2.Search 3.Update 4.Delete 5.Show 6.Exit")
+    print("\n1.Add 2.Search 3.Update 4.Delete 5.Show")
     choice = input("Enter choice: ")
 
     if choice == "1":
@@ -58,9 +57,6 @@ while True:
         delete_contact()
     elif choice == "5":
         show_all()
-    elif choice == "6":
-        print("exit")
-        break
     else:
         print("Invalid ")
         
