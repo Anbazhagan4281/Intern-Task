@@ -4,5 +4,4 @@ def average_marks(marks):
     total = sum(marks)
     avg=total / len(marks)
     return avg
-print(average_marks([50, 60, 80, 90, 76]))
-print(average_marks([]))
+print("average=",average_marks([72, 85, 90, 78, 88]))
