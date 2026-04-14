@@ -14,7 +14,6 @@ def add_student():
     except ValueError:
         print("Invalid age")
         return
-
     email = input("Enter Email: ")
     if not is_valid_email(email):
         print("Invalid email")

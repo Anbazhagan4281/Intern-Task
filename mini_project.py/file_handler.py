@@ -10,5 +10,8 @@ def load_data():
         return []
     
 def save_data(data):
-    with open(FILE_NAME, "w") as file:
-        json.dump(data, file, indent=4)
+    try:
+        with open(FILE_NAME, "w") as file:
+            json.dump(data, file, indent=4)
+    except Exception as e:
+        print(f"Error saving data: {e}")
