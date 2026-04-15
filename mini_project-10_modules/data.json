@@ -1,0 +1,68 @@
+[
+    {
+        "id": 1,
+        "name": "anu",
+        "age": 25,
+        "email": "anu@gmail.com",
+        "marks": [
+            40,
+            50,
+            60,
+            80,
+            50
+        ]
+    },
+    {
+        "id": 2,
+        "name": "abi",
+        "age": 25,
+        "email": "abi@gmai.com",
+        "marks": [
+            40,
+            50,
+            20,
+            35,
+            60
+        ]
+    },
+    {
+        "id": 3,
+        "name": "abi",
+        "age": 52,
+        "email": "abi@gmail.com",
+        "marks": [
+            40,
+            50,
+            60,
+            80
+        ]
+    },
+    {
+        "id": 4,
+        "name": "ammu",
+        "date_of_birth": "04/10/1999",
+        "age": 25,
+        "email": "ammu@gmail.com",
+        "marks": [
+            50,
+            40,
+            90,
+            80
+        ]
+    },
+    {
+        "id": 5,
+        "name": "rithu",
+        "date_of_birth": "10/12/1960",
+        "age": 25,
+        "email": "aisgu@gmail.com",
+        "marks": [
+            50,
+            20,
+            60,
+            80,
+            90
+        ],
+        "phone": "8804860789"
+    }
+]
