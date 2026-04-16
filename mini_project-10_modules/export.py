@@ -1,7 +1,7 @@
 import csv
 import os
 from file_handler import load_data
-from utils import calculate_avg, get_status, get_grade
+from utils import calculate_age, calculate_avg, get_status, get_grade
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CSV_FILE = os.path.join(BASE_DIR, "students.csv")
@@ -34,7 +34,7 @@ def export_to_csv():
                     s["id"],
                     s["name"],
                     dob,
-                    s["age"],
+                    calculate_age(dob),
                     s.get("phone", ""),
                     s["email"],
                     " ".join(map(str, s["marks"])),
@@ -43,7 +43,7 @@ def export_to_csv():
                     grade
                 ])
 
-        print("✅ CSV file created successfully!")
+        print("CSV file created successfully!")
 
     except Exception as e:
         print("Error exporting CSV:", e)

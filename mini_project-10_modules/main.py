@@ -1,4 +1,4 @@
-from utils import is_valid_phone, is_valid_email, calculate_avg, get_status, get_grade
+from utils import is_valid_phone, is_valid_email, calculate_avg, get_status, get_grade, calculate_age
 from file_handler import load_data, save_data
 from export import export_to_csv
 
@@ -27,26 +27,18 @@ def get_dob(student):
     # Handles both old + new data keys
     return student.get("date_of_birth") or student.get("date of birth")
 
-
 def add_student():
     print("\n--- Add Student ---")
     name = input("Enter Name: ")
-
-    try:
-        age = int(input("Enter Age: "))
-        if age <= 0:
-            raise InvalidAgeError("Error: Age must be greater than 0")
-    except ValueError:
-        print("Error: Age must be a number")
-        return
-    except InvalidAgeError as e:
-        print(e)
-        return
+    
 
     try:
         dob = input("Enter DOB (DD/MM/YYYY): ")
-        if len(dob.split("/")) != 3:
-            raise InvalidDOBError("Error: ---Invalid DOB format---")
+        age = calculate_age(dob)
+        
+        if age is None or age <= 0:
+            raise InvalidDOBError("Error: ---Invalid DOB ---")
+        
     except InvalidDOBError as e:
         print(e)
         return
@@ -106,6 +98,7 @@ def view_students():
 
     for s in data:
         dob = get_dob(s)  
+        age = calculate_age(get_dob(s))
         avg = calculate_avg(s["marks"]) 
         status = get_status(avg)
         grade = get_grade(avg)
@@ -115,7 +108,7 @@ def view_students():
         print(f"ID: {s['id']}")
         print(f"Name: {s['name']}")
         print(f"Date of Birth: {dob}")
-        print(f"Age: {s['age']}")
+        print(f"Age: {age}")
         print(f"Phone: {s.get('phone', 'N/A')}")
         print(f"Email: {s['email']}")
         print(f"Marks: {s['marks']}")

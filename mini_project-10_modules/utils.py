@@ -22,3 +22,19 @@ def get_grade(avg):
         return "C"
     else:
         return "D"
+    
+from datetime import datetime
+
+def calculate_age(dob):
+    try:
+        birth_date = datetime.strptime(dob, "%d/%m/%Y")
+        today = datetime.today()
+
+        age = today.year - birth_date.year
+
+        if (today.month, today.day) < (birth_date.month, birth_date.day):
+            age -= 1
+
+        return age
+    except:
+        return None

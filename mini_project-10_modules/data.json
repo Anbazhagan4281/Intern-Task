@@ -64,5 +64,20 @@
             90
         ],
         "phone": "8804860789"
+    },
+    {
+        "id": 6,
+        "name": "radha",
+        "date_of_birth": "04/10/1993",
+        "age": 32,
+        "phone": "9443565172",
+        "email": "radha@gmail.com",
+        "marks": [
+            40,
+            80,
+            90,
+            60,
+            50
+        ]
     }
 ]
