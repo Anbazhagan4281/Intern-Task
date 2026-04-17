@@ -1,6 +1,6 @@
 from utils import is_valid_phone, is_valid_email, calculate_avg, get_status, get_grade, calculate_age
 from file_handler import load_data, save_data
-from export import export_to_csv
+from export import export_to_csv, generate_report_card_pdf
 
 class InvalidAgeError(Exception):
     pass
@@ -37,7 +37,7 @@ def add_student():
         age = calculate_age(dob)
         
         if age is None or age <= 0:
-            raise InvalidDOBError("Error: ---Invalid DOB ---")
+            raise InvalidDOBError("Error: -*-Invalid DOB -*-")
         
     except InvalidDOBError as e:
         print(e)
@@ -46,7 +46,7 @@ def add_student():
     try:
         phone = input("Enter Phone Number: ")
         if not is_valid_phone(phone):
-            raise InvalidPhoneError("Error: ---Invalid phone number---")
+            raise InvalidPhoneError("Error: -*-Invalid phone number-*-")
     except InvalidPhoneError as e:
         print(e)
         return
@@ -54,7 +54,7 @@ def add_student():
     try:
         email = input("Enter Email: ")
         if not is_valid_email(email):
-            raise InvalidEmailError("Error: ---Invalid email---")
+            raise InvalidEmailError("Error: -*-Invalid email-*-")
     except InvalidEmailError as e:
         print(e)
         return
@@ -62,9 +62,9 @@ def add_student():
     try:
         marks = list(map(int, input("Enter marks (space separated): ").split()))
         if any(m < 0 or m > 100 for m in marks):
-            raise InvalidMarksError("Error: ---Marks must be between 0-100---")
+            raise InvalidMarksError("Error: -*-Marks must be between 0-100-*-")
     except ValueError:
-        print("Error: ---Marks must be numbers---")
+        print("Error: -*-Marks must be numbers-*-")
         return
     except InvalidMarksError as e:
         print(e)
@@ -122,7 +122,7 @@ def search_student():
     try:
         sid = int(input("Enter Student ID: "))
     except ValueError:
-        print("Error: ---Invalid ID---")
+        print("Error: -*-Invalid ID-*-")
         return
     
     data = load_data()
@@ -150,7 +150,7 @@ def update_marks():
     try:
         sid = int(input("Enter Student ID: "))
     except ValueError:
-        print("Error: ---Invalid ID---")
+        print("Error: -*-Invalid ID-*-")
         return
 
     data = load_data()
@@ -161,7 +161,7 @@ def update_marks():
                 new_marks = list(map(int, input("Enter new marks: ").split()))
 
                 if any(m < 0 or m > 100 for m in new_marks):
-                    raise InvalidMarksError("Error: ---Marks must be between 0-100---")
+                    raise InvalidMarksError("Error: -*-Marks must be between 0-100-*-")
 
                 s["marks"] = new_marks
                 save_data(data)
@@ -170,7 +170,7 @@ def update_marks():
                 return
 
             except ValueError:
-                print("Error: ---Marks must be numbers---")
+                print("Error: -*-Marks must be numbers-*-")
                 return
             except InvalidMarksError as e:
                 print(e)
@@ -203,13 +203,13 @@ def edit_student():
 
             if phone:
              if not is_valid_phone(phone):
-                print("Invalid phone number")
+                print("Error: -*-Invalid phone number-*-")
                 return
             s["phone"] = phone
 
             if email:
                 if not is_valid_email(email):
-                    print("Invalid email")
+                    print("Error: -*-Invalid email-*-")
                     return
                 s["email"] = email
 
@@ -226,7 +226,7 @@ def delete_student():
     try:
         sid = int(input("Enter Student ID: "))
     except ValueError:
-        print("Error: ---Invalid ID---")
+        print("Error: -*-Invalid ID-*-")
         return
 
     data = load_data()
@@ -234,7 +234,7 @@ def delete_student():
     new_data = [s for s in data if s["id"] != sid]
 
     if len(data) == len(new_data):
-        print("Error: ---Student not found---")
+        print("Error: -*-Student not found-*-")
     else:
         save_data(new_data)
         print("Student deleted successfully")
@@ -271,7 +271,8 @@ def main():
         print("6. Delete Student")
         print("7. Show Topper")
         print("8. Export to CSV")
-        print("9. Exit")
+        print("9. Generate Report Card PDF")
+        print("10. Exit")
 
         choice = input("Enter choice: ")
 
@@ -292,10 +293,26 @@ def main():
         elif choice == "8":
             export_to_csv()
         elif choice == "9":
-            print("Exiting")
-            break
-        else:
-            print("Error: ---Invalid choice---")
+            try:
+                sid = int(input("Enter Student ID: "))
+            except ValueError:
+                print("Invalid ID")
+                continue   
+            data = load_data()
+
+            for s in data:
+                if s["id"] == sid:
+                    generate_report_card_pdf(s)
+                    break
+            else:
+                print("Student not found")
+
+        elif choice == "10":
+            print("Exiting...")
+        break   
+        
+    else:
+        print("Error: -*-Invalid choice-*-")
 
 
 if __name__ == "__main__":

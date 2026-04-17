@@ -1,4 +1,7 @@
-ID,Name,Age,Email,Marks,Average,Status
-1,anu,25,anu@gmail.com,40 50 60 80 50,56.0,Pass
-2,abi,25,abi@gmai.com,40 50 20 35 60,41.0,Pass
-3,abi,52,abi@gmail.com,40 50 60 80,57.5,Pass
+ID,Name,DOB,Age,Phone,Email,Marks,Average,Status,Grade
+1,anu,N/A,25,,anu@gmail.com,40 50 60 80 50,56.0,Pass,C
+2,abi,N/A,25,,abi@gmai.com,40 50 20 35 60,41.0,Pass,D
+3,abi,N/A,52,,abi@gmail.com,40 50 60 80,57.5,Pass,C
+4,ammu,04/10/1999,25,,ammu@gmail.com,50 40 90 80,65.0,Pass,C
+5,rithu,10/12/1960,25,8804860789,aisgu@gmail.com,50 20 60 80 90,60.0,Pass,C
+6,radha,04/10/1993,32,9443565172,radha@gmail.com,40 80 90 60 50,64.0,Pass,C
