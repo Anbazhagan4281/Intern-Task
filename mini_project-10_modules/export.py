@@ -66,10 +66,15 @@ def generate_report_card_pdf(student):
     content.append(Spacer(1, 10))
 
     content.append(Paragraph(f"ID: {student['id']}", styles["Normal"]))
+    content.append(Spacer(1, 5))
     content.append(Paragraph(f"Name: {student['name']}", styles["Normal"]))
+    content.append(Spacer(1, 5))
     content.append(Paragraph(f"DOB: {dob}", styles["Normal"]))
+    content.append(Spacer(1, 5))
     content.append(Paragraph(f"Age: {age}", styles["Normal"]))
+    content.append(Spacer(1, 5))
     content.append(Paragraph(f"Phone: {student.get('phone','N/A')}", styles["Normal"]))
+    content.append(Spacer(1, 5))
     content.append(Paragraph(f"Email: {student['email']}", styles["Normal"]))
 
     content.append(Spacer(1, 10))
@@ -86,7 +91,9 @@ def generate_report_card_pdf(student):
 
     content.append(Spacer(1, 10))
     content.append(Paragraph(f"Average: {avg:.2f}", styles["Normal"]))
+    content.append(Spacer(1, 5))
     content.append(Paragraph(f"Status: {status}", styles["Normal"]))
+    content.append(Spacer(1, 5))
     content.append(Paragraph(f"Grade: {grade}", styles["Normal"]))
 
     doc.build(content)
