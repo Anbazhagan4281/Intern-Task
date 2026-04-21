@@ -1,0 +1,8 @@
+====== PATIENT REPORT ======
+ID          : P002
+Name        : sethuraman
+Age         : 65
+Blood Group : A+
+
+Prescriptions:
+============================

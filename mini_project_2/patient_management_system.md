@@ -1,3 +1,4 @@
+
 # 🏥 Patient Management System
 ### Python Mini Project
 
@@ -285,7 +286,7 @@ Connect everything together here.
 
 ```
 ╔══════════════════════════════════╗
-║   🏥 PATIENT MANAGEMENT SYSTEM  ║
+║   🏥 PATIENT MANAGEMENT SYSTEM   ║
 ╚══════════════════════════════════╝
 Session Operations: 0
 

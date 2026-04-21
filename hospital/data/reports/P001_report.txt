@@ -1,0 +1,8 @@
+====== PATIENT REPORT ======
+ID          : P001
+Name        : aishuram
+Age         : 56
+Blood Group : O+
+
+Prescriptions:
+============================

@@ -1,0 +1,10 @@
+====== PATIENT REPORT ======
+ID          : P003
+Name        : kamala
+Age         : 61
+Blood Group : B-
+
+Prescriptions:
+1. dolo | 650 | 5 days
+============================
+7

@@ -1,0 +1,63 @@
+[
+    {
+        "patient_id": "P001",
+        "name": "aishuram",
+        "age": 56,
+        "blood_group": "O+",
+        "contact": "9443565172",
+        "prescriptions": [],
+        "admitted_on": "2026-04-21T16:10:35.037687"
+    },
+    {
+        "patient_id": "P002",
+        "name": "sethuraman",
+        "age": 65,
+        "blood_group": "A+",
+        "contact": "9629568684",
+        "prescriptions": [],
+        "admitted_on": "2026-04-21T16:12:07.598295"
+    },
+    {
+        "patient_id": "P003",
+        "name": "kamala",
+        "age": 61,
+        "blood_group": "B-",
+        "contact": "7508964561",
+        "prescriptions": [
+            {
+                "medicine_name": "dolo",
+                "dosage": "650",
+                "days": 5,
+                "prescribed_on": "2026-04-22T00:10:00.702400"
+            }
+        ],
+        "admitted_on": "2026-04-21T16:12:45.335259"
+    },
+    {
+        "patient_id": "P004",
+        "name": "abirami",
+        "age": 89,
+        "blood_group": "B-",
+        "contact": "7894561230",
+        "prescriptions": [],
+        "admitted_on": "2026-04-21T16:13:25.113637"
+    },
+    {
+        "patient_id": "P005",
+        "name": "sankar",
+        "age": 40,
+        "blood_group": "A+",
+        "contact": "9321654987",
+        "prescriptions": [],
+        "admitted_on": "2026-04-21T16:14:07.931601"
+    },
+    {
+        "patient_id": "P006",
+        "name": "anumaliya",
+        "age": 56,
+        "blood_group": "A-",
+        "contact": "9443565172",
+        "prescriptions": [],
+        "admitted_on": "2026-04-21T23:41:43.568705"
+    }
+]
