@@ -1,0 +1,5 @@
+[
+    {"doctor_id": "D001", "name": "Dr. Ravi", "department": "Cardiology"},
+    {"doctor_id": "D002", "name": "Dr. Meena", "department": "Neurology"},
+    {"doctor_id": "D003", "name": "Dr. John", "department": "Orthopedics"}
+]

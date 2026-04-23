@@ -5,6 +5,12 @@ import csv
 import os
 from exceptions import FileOperationError
 
+DOCTORS = {
+    "D001": {"name": "Dr. Ram", "department": "Cardiology"},
+    "D002": {"name": "Dr. Priya", "department": "Neurology"},
+    "D003": {"name": "Dr. John", "department": "Orthopedics"}
+}
+
 # ✅ Base directory (hospital folder)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -122,3 +128,47 @@ def encode_backup(data):
     except Exception as e:
         print("DEBUG:", e)
         raise FileOperationError("Backup failed")
+
+# ==============================
+# Generate Department Report
+# ==============================
+
+def generate_department_report():
+
+    data = load_from_json()
+
+    if not data:
+        print("No data available")
+        return
+
+    print("\nDOCTOR & DEPARTMENT REPORT")
+    print("=" * 40)
+
+    doctor_map = {}
+
+    # group patients by doctor
+    for p in data:
+        doc_id = p.get("doctor_id", "UNKNOWN")
+
+        if doc_id not in doctor_map:
+            doctor_map[doc_id] = []
+
+        doctor_map[doc_id].append(p)
+
+    # print report
+    for doc_id, patients in doctor_map.items():
+
+        doctor_info = DOCTORS.get(doc_id, {
+            "name": "Unknown",
+            "department": "General"
+        })
+
+        print(f"\nDepartment : {doctor_info['department']}")
+        print(f"Doctor     : {doctor_info['name']} ({doc_id})")
+        print(f"Total Patients : {len(patients)}")
+
+        print("Patients:")
+        for p in patients:
+            print(f"- {p['patient_id']} | {p['name']} | Age: {p['age']}")
+
+        print("-" * 40)
