@@ -59,5 +59,21 @@
         "contact": "9443565172",
         "prescriptions": [],
         "admitted_on": "2026-04-21T23:41:43.568705"
+    },
+    {
+        "patient_id": "P007",
+        "name": "Anbu",
+        "age": 24,
+        "blood_group": "AB+",
+        "contact": "8778958062",
+        "prescriptions": [
+            {
+                "medicine_name": "paracetamol",
+                "dosage": "500",
+                "days": 4,
+                "prescribed_on": "2026-04-26T18:59:43.171974"
+            }
+        ],
+        "admitted_on": "2026-04-26T18:56:36.856070"
     }
 ]
