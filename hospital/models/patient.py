@@ -1,11 +1,10 @@
 # models/patient.py
 
 from datetime import datetime
-
+from models.prescription import Prescription
 
 class Patient:
-    total_patients = 0  # class variable
-
+   
     def __init__(self, patient_id, name, age, blood_group, contact):
         self.patient_id = patient_id
         self.name = name
@@ -15,8 +14,7 @@ class Patient:
         self.prescriptions = []
         self.admitted_on = datetime.now()
 
-        Patient.total_patients += 1
-
+    
     def __str__(self):
         return f"{self.patient_id} - {self.name} ({self.age})"
 
@@ -57,6 +55,14 @@ class Patient:
             data["blood_group"],
             data["contact"]
         )
+
+        patient.admitted_on = datetime.fromisoformat(data["admitted_on"])
+
+        patient.prescriptions = [
+            Prescription(p["medicine_name"], p["dosage"], p["days"])
+            for p in data.get("prescriptions", [])
+        ]
+
         return patient
 
     @staticmethod

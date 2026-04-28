@@ -5,8 +5,16 @@ from datetime import datetime
 
 # Generate ID
 def generate_id(prefix, data):
-    return f"{prefix}{len(data)+1:03d}"
+    if not data:
+        return f"{prefix}001"
 
+    existing = [
+        int(p["patient_id"][len(prefix):])
+        for p in data
+        if p["patient_id"].startswith(prefix)
+    ]
+
+    return f"{prefix}{max(existing)+1:03d}"
 
 # Format date
 def format_date(dt):
@@ -34,11 +42,7 @@ def session_tracker():
 
 # Recursive search
 def search_recursive(data, key, value, index=0):
-    if index >= len(data):
-        return None
-    if data[index].get(key) == value:
-        return data[index]
-    return search_recursive(data, key, value, index + 1)
+    return next((item for item in data if item.get(key) == value), None)
 
 
 # Lambda functions

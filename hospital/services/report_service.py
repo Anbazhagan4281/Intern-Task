@@ -35,7 +35,6 @@ def load_from_json():
             return json.load(f)
 
     except Exception as e:
-        print("DEBUG:", e)
         raise FileOperationError("Error loading JSON")
 
 
@@ -50,7 +49,6 @@ def export_to_json(patients):
             json.dump(patients, f, indent=4)
 
     except Exception as e:
-        print("DEBUG:", e)
         raise FileOperationError("Error saving JSON")
 
 
@@ -76,7 +74,6 @@ def export_to_csv(patients):
                 ])
 
     except Exception as e:
-        print("DEBUG:", e)
         raise FileOperationError("Error exporting CSV")
 
 
@@ -111,23 +108,15 @@ def generate_report(patient):
         return file_path
 
     except Exception as e:
-        print("DEBUG:", e)
         raise FileOperationError("Error generating report")
 
 
 # ==============================
 # Backup encode
 # ==============================
-def encode_backup(data):
-    try:
-        os.makedirs(os.path.join(BASE_DIR, "data"), exist_ok=True)
-
-        with open(BACKUP_FILE, "wb") as f:
-            f.write(json.dumps(data).encode("utf-8"))
-
-    except Exception as e:
-        print("DEBUG:", e)
-        raise FileOperationError("Backup failed")
+def save_backup(data):
+    with open("backup.json", "w") as f:
+        json.dump(data, f, indent=4)
 
 # ==============================
 # Generate Department Report

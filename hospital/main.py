@@ -82,10 +82,10 @@ def main():
             # ADD PATIENT
             # ==============================
             if choice == "1":
-                name = input("Name: ")
-                age = int(input("Age: "))
-                bg = input("Blood Group: ").upper()
-                contact = input("Contact: ")
+                name = input("Name: ").strip()
+                age = int(input("Age: ").strip())
+                bg = input("Blood Group: ").strip().upper()
+                contact = input("Contact: ").strip()
 
                 p = add_patient(name, age, bg, contact)
 
@@ -235,7 +235,7 @@ def main():
             # EXIT
             # ==============================
             elif choice == "0":
-                print("👋 Exiting... Bye da!")
+                print("Exiting... Bye")
                 sys.exit()
 
             else:

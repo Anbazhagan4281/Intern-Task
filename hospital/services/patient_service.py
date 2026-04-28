@@ -1,6 +1,14 @@
 import json
 import os
 import matplotlib.pyplot as plt
+DOCTOR_MAP = {
+    "heart": {"id": "D001", "name": "Dr. Ram", "dept": "Cardiology"},
+    "bp": {"id": "D001", "name": "Dr. Ram", "dept": "Cardiology"},
+    "brain": {"id": "D002", "name": "Dr. Priya", "dept": "Neurology"},
+    "headache": {"id": "D002", "name": "Dr. Priya", "dept": "Neurology"},
+    "fever": {"id": "D003", "name": "Dr. Kumar", "dept": "General"},
+    "cold": {"id": "D003", "name": "Dr. Kumar", "dept": "General"},
+}
 
 from models.patient import Patient
 from models.prescription import Prescription
@@ -85,6 +93,7 @@ def detect_risk(age, blood_group):
 # ==============================
 def add_patient(name, age, blood_group, contact):
 
+    # ✅ VALIDATIONS
     if not is_valid_name(name):
         raise InvalidPatientDataError("Invalid name")
 
@@ -99,28 +108,61 @@ def add_patient(name, age, blood_group, contact):
 
     data = load_data()
 
+    # ✅ DUPLICATE CHECK
+    for p in data:
+        if p["contact"] == contact:
+            raise Exception("Contact already exists")
+
+    # ✅ GENERATE ID
     patient_id = generate_id("P", data)
 
-    patient = Patient(patient_id, name, age, blood_group.upper(), contact)
+    # ==============================
+    # ✅ STEP 1 — PROBLEM INPUT
+    # ==============================
+    problem = input("Problem: ").strip()
 
-    patient_dict = patient.to_dict()
+    # ==============================
+    # ✅ STEP 2 — AUTO DOCTOR ASSIGN
+    # ==============================
+    doctor = assign_doctor(problem)
 
-    # 🔥 Risk Detection
+    doctor_id = doctor["id"]
+    doctor_name = doctor["name"]
+    department = doctor["dept"]
+
+    print(f"Assigned Doctor: {doctor_name} ({department})")
+
+    # ==============================
+    # ✅ STEP 3 — CREATE PATIENT DATA
+    # ==============================
+    patient_dict = {
+        "patient_id": patient_id,
+        "name": name,
+        "age": age,
+        "blood_group": blood_group.upper(),
+        "contact": contact,
+        "problem": problem,
+        "doctor_id": doctor_id,
+        "doctor_name": doctor_name,
+        "department": department
+    }
+
+    # ==============================
+    # ✅ STEP 4 — RISK DETECTION
+    # ==============================
     patient_dict["risk_level"] = detect_risk(age, blood_group.upper())
-
-    # 🔥 Doctor Assign
-    doctor_id = input("Assign Doctor ID (D001/D002): ")
-    patient_dict["doctor_id"] = doctor_id
 
     # 🚨 EMERGENCY ALERT
     if "HIGH" in patient_dict["risk_level"]:
         print("🚨 EMERGENCY ALERT! High risk patient!")
 
-    # Save
+    # ==============================
+    # ✅ STEP 5 — SAVE DATA
+    # ==============================
     data.append(patient_dict)
     save_data(data)
 
-    # 🚑 Emergency Check
+    # 🚑 EXTRA CHECK
     check_emergency(patient_dict)
 
     return patient_dict
@@ -146,16 +188,16 @@ def view_all_patients():
 # ==============================
 # SEARCH
 # ==============================
+from models.patient import Patient
+
 def search_patient(patient_id):
     data = load_data()
+    p = search_recursive(data, "patient_id", patient_id)
 
-    patient = search_recursive(data, "patient_id", patient_id)
+    if not p:
+        raise Exception("Not found")
 
-    if not patient:
-        raise PatientNotFoundError(patient_id)
-
-    return patient
-
+    return Patient.from_dict(p)
 
 # ==============================
 # UPDATE
@@ -295,3 +337,16 @@ def check_emergency(patient_dict):
         print(f"Risk Level : {risk}")
         print("Immediate medical attention required!")
         print("==============================\n")
+
+# ==============================   
+#AUTO ASSIGN FUNCTION
+# ==============================
+   
+def assign_doctor(problem):
+        problem = problem.lower()
+
+        for key in DOCTOR_MAP:
+            if key in problem:
+                return DOCTOR_MAP[key]
+
+        return {"id": "D003", "name": "Dr. Kumar", "dept": "General"}  # default

@@ -59,5 +59,17 @@
         "contact": "9443565172",
         "prescriptions": [],
         "admitted_on": "2026-04-21T23:41:43.568705"
+    },
+    {
+        "patient_id": "P007",
+        "name": "anubama",
+        "age": 25,
+        "blood_group": "O+",
+        "contact": "8877995012",
+        "problem": "cold",
+        "doctor_id": "D003",
+        "doctor_name": "Dr. Kumar",
+        "department": "General",
+        "risk_level": "LOW"
     }
 ]
